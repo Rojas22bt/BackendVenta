@@ -45,7 +45,7 @@ class  Usuario(AbstractBaseUser, PermissionsMixin):
 
     objects = UsuarioManager()
 
-    def _str_(self):
+    def __str__(self):
         return self.correo
     
 
@@ -56,5 +56,5 @@ class Bitacora(models.Model):
     fecha = models.DateField(default=timezone.now)
     hora = models.TimeField(default=timezone.now)
 
-    def _str_(self):
+    def __str__(self):
         return f"{self.usuario} - {self.accion} - {self.fecha} {self.hora}"
