@@ -1,1 +1,1 @@
-web: gunicorn PuntoVentaBK.wsgi
+web: sh -c "python manage.py migrate && gunicorn PuntoVentaBK.wsgi"
