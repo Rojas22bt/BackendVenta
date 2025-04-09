@@ -48,7 +48,6 @@ class  Usuario(AbstractBaseUser, PermissionsMixin):
     def _str_(self):
         return self.correo
     
-Usuario = get_user_model()
 
 class Bitacora(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
