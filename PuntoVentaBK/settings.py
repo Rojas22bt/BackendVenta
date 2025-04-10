@@ -136,3 +136,4 @@ CORS_ALLOWED_ORIGINS = [
     "https://effulgent-pithivier-ad008b.netlify.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True  # permite a Flutter consumir tu API
