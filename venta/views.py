@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import MetodoPagoSerializers, OfertasSerializers , FacturaVentaSerializers
+from .serializers import MetodoPagoSerializers, OfertasSerializers , FacturaVentaSerializer
 
 class CrearMetodPagoView(APIView):
     def post(self,request):
@@ -27,7 +27,7 @@ class CreateOfertaView(APIView):
 
 class createFacturaView(APIView):
     def post(self,request):
-        serializer = FacturaVentaSerializers(data=request.data)
+        serializer = FacturaVentaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({
