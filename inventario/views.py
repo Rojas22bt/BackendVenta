@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from BaseDatos.models import Marca, Almacen,Categoria
-from .serializers import MarcaSerializer, AlmacenSerializer, CategoriaSerializer , ProductoSerializer
+from .serializers import MarcaSerializer, AlmacenSerializer, CategoriaSerializer , ProductoSerializer, MercaderiaSerializer
 
 class CrearMarcaView(APIView):
     def post(self,request):
@@ -46,5 +46,17 @@ class CrearProductoView(APIView):
                 "mensaje": "Producto creado exitosamente",
                 "data": serializer.data
             }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class CrearMercaderiaView(APIView):
+    def post(self, request):
+        serializer = MercaderiaSerializer(data=request.data)
+        if serializer.is_valid():
+            mercaderia = serializer.save()
+            return Response({
+                "mensaje": "Mercadería registrada correctamente",
+                "data": MercaderiaSerializer(mercaderia).data
+            }, status=status.HTTP_201_CREATED)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
