@@ -182,8 +182,8 @@ class DetalleDocumento(models.Model):
 
 class Bitacora(models.Model):
     ip = models.CharField(max_length=15)
-    fecha = models.DateField(auto_now_add=True)
-    hora = models.TimeField(auto_now_add=True)
+    fecha = models.DateField(default=timezone.now)
+    hora = models.TimeField(default=timezone.now)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     accion = models.CharField(max_length=100, blank=True, null=True)
 

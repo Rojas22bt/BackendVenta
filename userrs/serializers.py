@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from BaseDatos.models import Rol, Usuario
+from BaseDatos.models import Rol, Usuario, Documento
 
 class RolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rol
         fields = ['id', 'nombre']
+
+class DocumentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Documento
+        fields = ['id','descripcion']
 
 class UsuarioRegistroSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
