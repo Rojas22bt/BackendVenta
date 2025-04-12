@@ -78,7 +78,7 @@ class UsuarioLoginSerializer(serializers.Serializer):
         
         refresh = RefreshToken.for_user(usuario)
         
-        documentos = DetalleDocumento.objects.filter( usuario=usuario).vaues(
+        documentos = DetalleDocumento.objects.filter( usuario=usuario).values(
             'documento__descripcion','numero'
         )
         
