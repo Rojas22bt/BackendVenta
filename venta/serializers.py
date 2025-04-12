@@ -40,79 +40,62 @@ class OfertasSerializers(serializers.ModelSerializer):
 
         return oferta
     
-class FacturaVentaSerializers(serializers.Serializer):
-    nit = serializers.IntegerField()
-    descripcion = serializers.CharField(required=False, allow_blank=True, allow_null=True)
-    fecha = serializers.DateField()
-    precio_unidad = serializers.DecimalField(max_digits=10, decimal_places=2)
-    precio_total = serializers.DecimalField(max_digits=10, decimal_places=2)
-    cod_autorizacion = serializers.CharField(required=False, allow_blank=True, allow_null=True)
-    estado = serializers.BooleanField(default=True)
-
-    detalle = serializers.CharField()  # para la transacción
-    metodo_pago = serializers.IntegerField()  # ID de método de pago
-
-    usuario = serializers.IntegerField()  # ID del usuario
-
-    productos = serializers.ListField(
-        child=serializers.DictField(), required=False
-    )
-    ofertas = serializers.ListField(
-        child=serializers.DictField(), required=False
-    )
+class FacturaVentaSerializer(serializers.Serializer):
+    factura = serializers.DictField()
+    transaccion = serializers.DictField()
+    nota_venta = serializers.DictField()
+    productos = serializers.ListField(child=serializers.DictField(), required=False)
+    ofertas = serializers.ListField(child=serializers.DictField(), required=False)
 
     def create(self, validated_data):
-        productos_data = validated_data.pop('productos', [])
-        ofertas_data = validated_data.pop('ofertas', [])
+        factura_data = validated_data.pop("factura")
+        transaccion_data = validated_data.pop("transaccion")
+        nota_venta_data = validated_data.pop("nota_venta")
+        productos_data = validated_data.pop("productos", [])
+        ofertas_data = validated_data.pop("ofertas", [])
 
         # 1. Crear la transacción
-        metodo_pago_id = validated_data.pop('metodo_pago')
         transaccion = Transaccion.objects.create(
-            detalle=validated_data.pop('detalle'),
-            metodo_pago_id=metodo_pago_id
+            detalle=transaccion_data["detalle"],
+            metodo_pago_id=transaccion_data["metodo_pago"]
         )
 
         # 2. Crear la factura
-        factura = Factura.objects.create(**validated_data)
+        factura = Factura.objects.create(**factura_data)
 
         # 3. Crear la nota de venta
         nota_venta = NotaVenta.objects.create(
-            descripcion="Venta registrada",
+            descripcion=nota_venta_data["descripcion"],
             transaccion=transaccion,
             factura=factura,
-            usuario_id=validated_data.pop('usuario')
+            usuario_id=nota_venta_data["usuario"]
         )
 
         # 4. Crear detalle de venta para productos
         for prod in productos_data:
-            producto_id = prod.get('id')
-            cantidad = prod.get('cantidad', 1)
+            producto = Producto.objects.get(id=prod["id"])
+            cantidad = prod.get("cantidad", 1)
 
-            if producto_id:
-                producto = Producto.objects.get(id=producto_id)
-
-                if producto.stock < cantidad:
-                    raise serializers.ValidationError(
-                        f"Stock insuficiente para el producto '{producto.nombre}'. Disponible: {producto.stock}, solicitado: {cantidad}"
-                    )
-                DetalleVenta.objects.create(
-                    producto=producto,
-                    nota_venta=nota_venta,
-                    cantidad=cantidad
+            if producto.stock < cantidad:
+                raise serializers.ValidationError(
+                    f"Stock insuficiente para el producto '{producto.nombre}'. Disponible: {producto.stock}, solicitado: {cantidad}"
                 )
-                producto.stock -= cantidad
-                producto.save()
+
+            DetalleVenta.objects.create(
+                producto=producto,
+                nota_venta=nota_venta,
+                cantidad=cantidad
+            )
+            producto.stock -= cantidad
+            producto.save()
 
         # 5. Crear venta oferta para ofertas
         for oferta in ofertas_data:
-            oferta_id = oferta.get('id')
-            cantidad = oferta.get('cantidad', 1)
-            if oferta_id:
-                VentaOferta.objects.create(
-                    oferta_id=oferta_id,
-                    nota_venta=nota_venta,
-                    cantidad=cantidad
-                )
+            VentaOferta.objects.create(
+                oferta_id=oferta["id"],
+                nota_venta=nota_venta,
+                cantidad=oferta.get("cantidad", 1)
+            )
 
         return {
             "factura_id": factura.id,
