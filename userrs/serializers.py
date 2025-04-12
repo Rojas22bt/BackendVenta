@@ -24,10 +24,13 @@ class UsuarioRegistroSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        password = validated_data.pop('password')
+        password = validated_data.pop("password")
+        rol = validated_data.pop("rol")  # Esto llega como una instancia o ID
+
         usuario = Usuario.objects.create_user(
-            correo=validated_data['correo'],
             password=password,
+            rol=rol,  # puede ser ID o instancia
             **validated_data
         )
         return usuario
+
