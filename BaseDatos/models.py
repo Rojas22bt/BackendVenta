@@ -185,3 +185,5 @@ class Bitacora(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    accion = models.CharField(max_length=100, blank=True, null=True)
+

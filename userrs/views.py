@@ -3,8 +3,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from BaseDatos.models import Rol,Usuario,Cliente,Administrador
+from BaseDatos.models import Rol,Usuario,Cliente,Administrador, Bitacora
 from .serializers import RolSerializer,UsuarioRegistroSerializer
+from datetime import datetime
 
 class CrearRolView(APIView):
     def post(self, request):
@@ -24,6 +25,14 @@ class RegistrarUsuarioViem(APIView):
                 Cliente.objects.create(usuario=usuario, puntos=0)
             elif usuario.rol.id == 1:
                 Administrador.objects.create(usuario = usuario)
+            
+            Bitacora.objects.create(
+                ip = request.Meta.get('REOMOTE_ADDR','0.0.0.0'),
+                fecha = datetime.now().date(),
+                hora=datetime.now().time(),
+                accion= "Registro de nuevo Usuario",
+                usuario=usuario
+            )
             
             return Response({
                 "mensaje": "Usuario registrado correctamente",
