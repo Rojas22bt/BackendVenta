@@ -17,7 +17,7 @@ class CrearMetodPagoView(APIView):
 class CreateOfertaView(APIView):
     def post(self,request):
         serializer = OfertasSerializers(data=request.data)
-        if serializer.is_valid:
+        if serializer.is_valid():
             serializer.save()
             return Response({
                 "mensaje": "Oferta agregada",
@@ -28,7 +28,7 @@ class CreateOfertaView(APIView):
 class createFacturaView(APIView):
     def post(self,request):
         serializer = FacturaVentaSerializers(data=request.data)
-        if serializer.is_valid:
+        if serializer.is_valid():
             serializer.save()
             return Response({
                 "mensaje": "Venta exitosa",
