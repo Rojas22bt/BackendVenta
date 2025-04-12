@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'BaseDatos',
-    'userrs',
+    'userrs'
 ]
 
 MIDDLEWARE = [
