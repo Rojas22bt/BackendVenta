@@ -26,13 +26,12 @@ class CreateOfertaView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class createFacturaView(APIView):
-    def post(self,request):
+    def post(self, request):
         serializer = FacturaVentaSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            resultado = serializer.save()
             return Response({
                 "mensaje": "Venta exitosa",
-                "data": serializer.data
+                "data": resultado  # ← aquí se usa el diccionario retornado desde create()
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
