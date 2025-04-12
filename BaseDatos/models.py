@@ -68,6 +68,10 @@ class IngresoProducto(models.Model):
 class DetalleVenta(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     nota_venta = models.ForeignKey(NotaVenta, on_delete=models.CASCADE)
+    cantidad = models.IntegerField(default=1)
+    
+    class Meta:
+        unique_together = ('producto', 'nota_venta')
 
 # --------- MÓDULO DE OFERTAS ---------
 class Oferta(models.Model):
