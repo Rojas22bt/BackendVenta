@@ -57,7 +57,7 @@ class MercaderiaSerializer(serializers.ModelSerializer):
         mercaderia = Mercaderia.objects.create(**validated_data)
 
         for prod in productos_data:
-            producto = Producto.objects.get(id=prod['producto'])
+            producto = Producto.objects.get(id=prod['id'])
             cantidad = prod['cantidad']
             precio_compra = prod['precio_compra']
 
