@@ -26,7 +26,7 @@ class ProductoSerializer(serializers.ModelSerializer):
             'stock',
             'precio',
             'estado',
-            'almacen_id',
-            'categoria_id',
-            'marca_id'
+            'almacen',
+            'categoria',
+            'marca'
             ]
