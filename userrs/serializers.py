@@ -17,5 +17,6 @@ class UsuarioRegistroSerializer(serializers.ModelSerializer):
             'fecha_nacimiento',
             'sexo',
             'estado',
+            'password',
             'rol'
         ]
