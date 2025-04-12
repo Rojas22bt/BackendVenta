@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from BaseDatos.models import Rol,Usuario,Cliente,Administrador, Bitacora , Documento, DetalleDocumento, Permiso
-from .serializers import RolSerializer,UsuarioRegistroSerializer,DocumentoSerializer, PrivilegiosSerializer
+from .serializers import RolSerializer,UsuarioRegistroSerializer,DocumentoSerializer, PrivilegiosSerializer, UsuarioLoginSerializer
 from datetime import datetime
 
 class CrearRolView(APIView):
@@ -66,4 +66,11 @@ class CrearPrivilegioViem(APIView):
                 "mensaje":"Privilegios creado con permisos asignados a todos los roles",
                 "prilegio": PrivilegiosSerializer(privilegio).data
             }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LoginUsuarioView(APIView):
+    def post(self,request):
+        serializer = UsuarioLoginSerializer(data=request.data)
+        if serializer.is_valid():
+           return Response(serializer.validated_data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
