@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from BaseDatos.models import Rol, Usuario, Documento, DetalleDocumento
+from BaseDatos.models import Rol, Usuario, Documento, DetalleDocumento ,Privilegio
 
 class RolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rol
         fields = ['id', 'nombre']
+        
+class PrivilegiosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Privilegio
+        fields = ['id','descripcion']
 
 class DocumentoSerializer(serializers.ModelSerializer):
     class Meta:
