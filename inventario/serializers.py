@@ -1,4 +1,4 @@
-from BaseDatos.models import Marca, Categoria, Almacen
+from BaseDatos.models import Marca, Categoria, Almacen , Producto
 from rest_framework import serializers
 
 class MarcaSerializer(serializers.ModelSerializer):
@@ -15,3 +15,18 @@ class AlmacenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Almacen
         fields = ['id','descripcion','cantidad']
+
+class ProductoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = [
+            'id',
+            'nombre',
+            'modelo',
+            'stock',
+            'precio',
+            'estado',
+            'almacen_id',
+            'categoria_id',
+            'marca_id'
+            ]
