@@ -31,7 +31,6 @@ SECRET_KEY = 'django-insecure-hap7b)e=_!9!dqp0i)!tg1)0^rix6+2qi9d+9ij@i7-xey)vo2
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','web-production-ab6a3.up.railway.app']
-AUTH_USER_MODEL = 'Usuarios2.Usuario'
 
 
 # Application definition
@@ -45,8 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'Usuarios2',
-    'BaseDatos'
+    'BaseDatos',
 ]
 
 MIDDLEWARE = [
