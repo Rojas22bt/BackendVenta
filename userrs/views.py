@@ -28,8 +28,6 @@ class RegistrarUsuarioViem(APIView):
             
             Bitacora.objects.create(
                 ip = request.META.get('REMOTE_ADDR', '0.0.0.0'),
-                fecha = datetime.now().date(),
-                hora=datetime.now().time(),
                 accion= "Registro de nuevo Usuario",
                 usuario=usuario
             )
