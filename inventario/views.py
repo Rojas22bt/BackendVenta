@@ -8,6 +8,7 @@ class CrearMarcaView(APIView):
     def post(self,request):
         serializer = MarcaSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.save()
             return Response({
                 "mensaje": "Marca registrado exitosamente",
                 "data" : serializer.data
@@ -18,6 +19,7 @@ class CrearAlmacenView(APIView):
     def post(self,request):
         serializer = AlmacenSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.save()
             return Response({
                 "mensaje":"Almacen creado exitosamente",
                 "data": serializer.data
@@ -28,6 +30,7 @@ class CrearCategoriaView(APIView):
     def post(self,request):
         serializer = CategoriaSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.save()
             return Response({
                 "mensaje":"Categoria agregado exitosamente",
                 "data": serializer.data
