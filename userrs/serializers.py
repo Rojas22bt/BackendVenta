@@ -64,7 +64,7 @@ class UsuarioRegistroSerializer(serializers.ModelSerializer):
 
 class UsuarioLoginSerializer(serializers.Serializer):
     correo = serializers.EmailField()
-    passowrd = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True)
     
     def validate(self,data):
         correo = data.get('correo')
