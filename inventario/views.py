@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from BaseDatos.models import Marca, Almacen,Categoria
-from .serializers import MarcaSerializer, AlmacenSerializer, CategoriaSerializer , ProductoSerializer, MercaderiaSerializer
+from .controllers.serializers import MarcaSerializer, AlmacenSerializer, CategoriaSerializer , ProductoSerializer, MercaderiaSerializer
 
 class CrearMarcaView(APIView):
     def post(self,request):

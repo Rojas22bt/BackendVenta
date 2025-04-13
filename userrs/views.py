@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from BaseDatos.models import Rol,Usuario,Cliente,Administrador, Bitacora , Documento, DetalleDocumento, Permiso
-from .serializers import RolSerializer,UsuarioRegistroSerializer,DocumentoSerializer, PrivilegiosSerializer, UsuarioLoginSerializer
+from .controllers.serializers import RolSerializer,UsuarioRegistroSerializer,DocumentoSerializer, PrivilegiosSerializer, UsuarioLoginSerializer
 from datetime import datetime
 
 class CrearRolView(APIView):
