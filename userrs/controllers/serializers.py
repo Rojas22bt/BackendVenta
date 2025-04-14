@@ -105,7 +105,8 @@ class UsuarioLoginSerializer(serializers.Serializer):
         }
         
 class BitacoraSerializer(serializers.ModelSerializer):
+    usuario_nombre = serializers.CharField(source='usuario.nombre',read_only=True)
     class Meta:
         model = Bitacora
-        fields = '__all__'
+        fields = ['id', 'ip', 'fecha', 'hora', 'accion', 'usuario', 'usuario_nombre']
         
