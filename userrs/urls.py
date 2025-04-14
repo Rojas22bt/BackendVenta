@@ -8,5 +8,5 @@ urlpatterns = [
     path('registro/',RegistrarUsuarioViem.as_view(), name='usuario-registro' ),
     path('documento/',CrearDocumentoViem.as_view(), name='documento-registro' ),
     path('privilegio/',CrearPrivilegioViem.as_view(), name='privilegio-registro' ),
-    path('login/',LoginUsuarioView.as_view(), name='login' ),
+    path('/login',LoginUsuarioView.as_view(), name='login' ),
 ]
