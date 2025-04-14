@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
-from BaseDatos.models import Rol, Usuario, Documento, DetalleDocumento ,Privilegio,Permiso
+from BaseDatos.models import Rol, Usuario, Documento, DetalleDocumento ,Privilegio,Permiso, Bitacora
 
 class RolSerializer(serializers.ModelSerializer):
     class Meta:
@@ -103,4 +103,9 @@ class UsuarioLoginSerializer(serializers.Serializer):
                 "documentos": list(documentos)
             }
         }
+        
+class BitacoraSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bitacora
+        fields = '__all__'
         
