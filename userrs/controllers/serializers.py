@@ -114,6 +114,7 @@ class BitacoraSerializer(serializers.ModelSerializer):
 class UsuarioSerializer(serializers.ModelSerializer):
     cliente_punto = serializers.CharField(source='cliente.puntos',read_only=True)
     class Meta:
+        model = Usuario
         fields = [            
             'id',
             'nombre',
