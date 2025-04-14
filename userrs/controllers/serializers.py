@@ -111,3 +111,16 @@ class BitacoraSerializer(serializers.ModelSerializer):
         model = Bitacora
         fields = ['id', 'ip', 'fecha', 'hora', 'accion', 'usuario', 'usuario_nombre','usuario_correo']
         
+class UsuarioSerializer(serializers.ModelSerializer):
+    cliente_punto = serializers.CharField(source='cliente.puntos',read_only=True)
+    class Meta:
+        fields = [            
+            'id',
+            'nombre',
+            'correo',
+            'telefono',
+            'fecha_nacimiento',
+            'sexo',
+            'estado',
+            'rol',
+            'cliente_punto']
