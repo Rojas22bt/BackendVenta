@@ -5,7 +5,7 @@ from .views import CrearRolView, RegistrarUsuarioViem,CrearDocumentoViem,CrearPr
 
 urlpatterns = [
     path('rol/', CrearRolView.as_view(), name='crear_rol'),
-    path('registro/',RegistrarUsuarioViem.as_view(), name='usuario-registro' ),
+    path('/registro',RegistrarUsuarioViem.as_view(), name='usuario-registro' ),
     path('documento/',CrearDocumentoViem.as_view(), name='documento-registro' ),
     path('privilegio/',CrearPrivilegioViem.as_view(), name='privilegio-registro' ),
     path('/login',LoginUsuarioView.as_view(), name='login' ),
