@@ -28,11 +28,9 @@ class ProductoSerializer(serializers.ModelSerializer):
             'estado',
             'almacen',
             'categoria',
+            'url',
             'marca'
             ]
-    
-from rest_framework import serializers
-from BaseDatos.models import Mercaderia, IngresoProducto, Producto
 
 class MercaderiaSerializer(serializers.ModelSerializer):
     productos = serializers.ListField(
