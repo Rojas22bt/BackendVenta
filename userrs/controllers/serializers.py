@@ -101,6 +101,7 @@ class UsuarioLoginSerializer(serializers.Serializer):
                 "sexo": usuario.sexo,
                 "puntos": getattr(usuario.cliente, "puntos", 0),
                 "rol": usuario.rol.nombre,
+                "estado": usuario.estado,
                 "permisos": list(permisos),
                 "documentos": list(documentos)
             }
