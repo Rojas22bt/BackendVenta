@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from BaseDatos.models import Usuario, Rol
-from .serializers import UsuarioSerializer
+from BaseDatos.models import Usuario, Rol, DetalleDocumento
+from .serializers import UsuarioSerializer, PerfilUsuarioSerializer
 
 @api_view(['GET'])
 def obtenerUsuarios(request):
@@ -11,6 +11,11 @@ def obtenerUsuarios(request):
     return Response(serializer.data)
     
 
+@api_view(['GET'])
+def obtenerPerfil(request):
+    usuarios = Usuario.objects.all()
+    serializer = PerfilUsuarioSerializer(usuarios, many=True)
+    return Response(serializer.data)
         
 @api_view(['PATCH'])
 def actualizar_usuario(request):

@@ -130,3 +130,31 @@ class RolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rol
         fields = '__all__'
+        
+class PerfilUsuarioSerializer(serializers.ModelSerializer):
+    puntos = serializers.IntegerField(source='cliente.puntos', read_only=True)
+    documentos = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Usuario
+        fields = [
+            'id',
+            'nombre',
+            'correo',
+            'telefono',
+            'fecha_nacimiento',
+            'sexo',
+            'estado',
+            'rol',
+            'puntos',
+            'documentos'
+        ]
+
+    def get_documentos(self, obj):
+        return [
+            {
+                "id": doc.documento_id,  # o doc.id según tu modelo
+                "numero": doc.numero
+            }
+            for doc in obj.detalledocumento_set.all()
+        ]
