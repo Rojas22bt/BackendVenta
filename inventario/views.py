@@ -39,6 +39,7 @@ class CrearCategoriaView(APIView):
     
 class CrearProductoView(APIView):
     def post(self, request):
+        print("📦 Datos recibidos en el body:", request.data)
         serializer = ProductoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
