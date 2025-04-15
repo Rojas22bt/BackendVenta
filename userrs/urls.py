@@ -20,6 +20,6 @@ urlpatterns = [
     path('/',obtenerUsuarios,name='obtener-usuarios'),
     path('/roles',obtenerRol,name='obtener-rol'),
 
-    path('/actualizr',actualizar_usuario)
+    path('/actualizar',actualizar_usuario)
     
 ]
