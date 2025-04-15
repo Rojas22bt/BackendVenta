@@ -46,5 +46,49 @@ def actualizar_marca(request):
     return Response({
         'mensaje': f"Marca '{marca.nombre}' actualizada correctamente ✅"
     }, status=status.HTTP_200_OK)
-        
-        
+
+      
+@api_view(['PATCH'])
+def actualizar_categoria(request):
+    id_categoria = request.data.get('id')
+    nuevo_nombre = request.data.get('nombre')
+
+    if not id_categoria:
+        return Response({'error': 'El id es obligatorio'}, status=status.HTTP_400_BAD_REQUEST)
+    if not nuevo_nombre:
+        return Response({'error': 'El nombre es obligatorio'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        categoria = Categoria.objects.get(id=id_categoria)
+    except Marca.DoesNotExist:
+        return Response({'error': 'Marca no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+
+    categoria.nombre = nuevo_nombre
+    categoria.save()
+
+    return Response({
+        'mensaje': f"Marca '{categoria.nombre}' actualizada correctamente ✅"
+    }, status=status.HTTP_200_OK)  
+    
+
+@api_view(['PATCH'])
+def actualizar_almacen(request):
+    id_almacen = request.data.get('id')
+    nuevo_descripcion = request.data.get('descripcion')
+
+    if not id_almacen:
+        return Response({'error': 'El id es obligatorio'}, status=status.HTTP_400_BAD_REQUEST)
+    if not nuevo_descripcion:
+        return Response({'error': 'El nombre es obligatorio'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        almacen = Almacen.objects.get(id=id_almacen)
+    except Marca.DoesNotExist:
+        return Response({'error': 'Marca no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+
+    almacen.descripcion = nuevo_descripcion
+    almacen.save()
+
+    return Response({
+        'mensaje': f"Marca '{almacen.descripcion}' actualizada correctamente ✅"
+    }, status=status.HTTP_200_OK)     
