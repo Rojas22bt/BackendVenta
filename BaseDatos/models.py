@@ -48,6 +48,7 @@ class Marca(models.Model):
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=25)
+    url = models.URLField(max_length=1000, null=True, blank=True)
     modelo = models.CharField(max_length=25)
     stock = models.IntegerField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
