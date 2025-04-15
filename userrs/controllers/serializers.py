@@ -99,7 +99,7 @@ class UsuarioLoginSerializer(serializers.Serializer):
                 "telefono": usuario.telefono,
                 "fecha_nacimiento": usuario.fecha_nacimiento,
                 "sexo": usuario.sexo,
-                "puntos":usuario.cliente.puntos,
+                "puntos": getattr(usuario.cliente, "puntos", 0),
                 "rol": usuario.rol.nombre,
                 "permisos": list(permisos),
                 "documentos": list(documentos)
