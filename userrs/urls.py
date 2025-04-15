@@ -5,6 +5,7 @@ from .views import CrearRolView, RegistrarUsuarioViem,CrearDocumentoViem,CrearPr
 
 from .controllers.controller_bitacora import obtenerBitacora
 from .controllers.controlles_usuario import obtenerUsuarios
+from .controllers.controller_rol import obtenerRol
 
 urlpatterns = [
     path('rol/', CrearRolView.as_view(), name='crear_rol'),
@@ -15,6 +16,7 @@ urlpatterns = [
     
     
     path('/bitacora', obtenerBitacora, name="get_bitacoras"),
-    path('/',obtenerUsuarios,name='obtener-usuarios')
+    path('/',obtenerUsuarios,name='obtener-usuarios'),
+    path('/',obtenerRol,name='obtener-rol')
     
 ]

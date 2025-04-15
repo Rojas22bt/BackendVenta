@@ -125,3 +125,8 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'estado',
             'rol',
             'cliente_punto']
+
+class RolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rol
+        fields = '__all__'
