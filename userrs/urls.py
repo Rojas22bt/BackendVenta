@@ -17,6 +17,6 @@ urlpatterns = [
     
     path('/bitacora', obtenerBitacora, name="get_bitacoras"),
     path('/',obtenerUsuarios,name='obtener-usuarios'),
-    path('/',obtenerRol,name='obtener-rol')
+    path('/roles',obtenerRol,name='obtener-rol')
     
 ]
