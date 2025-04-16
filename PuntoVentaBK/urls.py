@@ -11,7 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Otras rutas de tus apps
     path('api/usuario', include('userrs.urls')),
-    path('api/inventario/', include('inventario.urls')),
+    path('api/inventario', include('inventario.urls')),
     path('api/', include('venta.urls')),
     # URLs para JWT
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
