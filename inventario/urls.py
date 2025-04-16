@@ -3,7 +3,7 @@
 from django.urls import path
 from .views import CrearAlmacenView,CrearCategoriaView,CrearMarcaView ,CrearProductoView ,CrearMercaderiaView
 from .controllers.controllers_categorias import obtenerAlmacen,obtenerCategoria,obtenerMarca, actualizar_marca, actualizar_almacen,actualizar_categoria
-from .controllers.controllers_producto import obtenerProductos
+from .controllers.controllers_producto import obtenerProductos, actualizar_producto
 
 urlpatterns = [
     path('/marca', CrearMarcaView.as_view(), name='marca'),
@@ -20,5 +20,6 @@ urlpatterns = [
     path('/actualizar-categoria', actualizar_categoria),
     path('/actualizar-almacen', actualizar_almacen),
     
-    path('/obtener-producto',obtenerProductos,name='obtener-productos')
+    path('/obtener-producto',obtenerProductos,name='obtener-productos'),
+    path('/actualizar-producto',actualizar_producto),
 ]
