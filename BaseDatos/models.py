@@ -47,7 +47,7 @@ class Marca(models.Model):
     nombre = models.CharField(max_length=50)
 
 class Producto(models.Model):
-    nombre = models.CharField(max_length=25)
+    nombre = models.CharField(max_length=60)
     url = models.URLField(max_length=1000, null=True, blank=True)
     modelo = models.CharField(max_length=25)
     stock = models.IntegerField()
