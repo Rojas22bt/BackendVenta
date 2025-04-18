@@ -11,6 +11,11 @@ def obtenerProductos(request):
     serializer = ProductoSerializer(productos, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def obtenerProductosActivos(request):
+    productos = Producto.objects.filter(estado=True)  # 👈 Solo productos con estado True
+    serializer = ProductoSerializer(productos, many=True)
+    return Response(serializer.data)
 
 @api_view(['PATCH'])
 def actualizar_producto(request):
