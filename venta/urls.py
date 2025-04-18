@@ -7,6 +7,6 @@ urlpatterns = [
     path('/oferta/register', CreateOfertaView.as_view(), name='crear-pago'),
     path('venta/factura/', createFacturaView.as_view(), name='factura-venta'),
     
-    path('/venta/obtener-ofertas',obtenerOfertas, name='obtener-ofertas'),
-    path('/venta/obtener-ofertas-activas',obtenerOfertasActivas, name='obtener-ofertas-activas'),
+    path('/obtener-ofertas',obtenerOfertas, name='obtener-ofertas'),
+    path('/obtener-ofertas-activas',obtenerOfertasActivas, name='obtener-ofertas-activas'),
 ]
