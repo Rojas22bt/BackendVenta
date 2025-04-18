@@ -81,6 +81,7 @@ class Oferta(models.Model):
     fecha_final = models.DateField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     estado = models.BooleanField(default=True)
+    url = models.URLField(max_length=1000, null=True, blank=True)
 
 class DetalleOferta(models.Model):
     oferta = models.ForeignKey(Oferta, on_delete=models.CASCADE)
