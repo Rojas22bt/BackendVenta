@@ -34,7 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost','web-production-ab6a3.up.railway.app','127.0.0.1']
 AUTH_USER_MODEL = 'BaseDatos.Usuario'
 
-
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
 # Application definition
 

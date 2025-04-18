@@ -2,6 +2,27 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .controllers.serializers import MetodoPagoSerializers, OfertasSerializers , FacturaVentaSerializer
+from django.conf import settings
+from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+@csrf_exempt
+@api_view(['POST'])
+def crear_pago(request):
+    try:
+        data = request.data
+        amount = int(float(data.get("amount", 0)) * 100)  # convertir a centavos
+        intent = stripe.PaymentIntent.create(
+            amount=amount,
+            currency='usd',
+            payment_method_types=["card"],
+        )
+        return Response({"clientSecret": intent.client_secret})
+    except Exception as e:
+        return Response({"error": str(e)}, status=400)
 
 class CrearMetodPagoView(APIView):
     def post(self,request):
