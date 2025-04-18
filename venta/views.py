@@ -13,6 +13,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 @api_view(['POST'])
 def crear_pago(request):
     print("🔐 Stripe Key:", settings.STRIPE_SECRET_KEY)
+    print("🔐 Stripe Key:", request.data)
     try:
         data = request.data
         amount = int(float(data.get("amount", 0)) * 100)  # convertir a centavos
