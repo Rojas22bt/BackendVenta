@@ -20,6 +20,7 @@ class OfertasSerializers(serializers.ModelSerializer):
             'fecha_final',
             'precio',
             'estado',
+            'url',
             'productos'
         ]
     
