@@ -13,7 +13,7 @@ def obtenerProductos(request):
 
 @api_view(['GET'])
 def obtenerProductosActivos(request):
-    productos = Producto.objects.filter(estado=True)  # 👈 Solo productos con estado True
+    productos = Producto.objects.filter(estado=True, stock__gt=0)
     serializer = ProductoSerializer(productos, many=True)
     return Response(serializer.data)
 
