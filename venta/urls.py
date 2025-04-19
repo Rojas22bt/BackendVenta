@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import CrearMetodPagoView, CreateOfertaView, createFacturaView, crear_pago
 from .controllers.controller_oferta import obtenerOfertas, obtenerOfertasActivas
+from .controllers.controller_venta import ComprobanteView
 
 urlpatterns = [
     path('venta/metodoPago/', CrearMetodPagoView.as_view(), name='crear-pago'),
@@ -9,4 +10,5 @@ urlpatterns = [
     path('/crear-pago', crear_pago),
     path('/obtener-ofertas',obtenerOfertas, name='obtener-ofertas'),
     path('/obtener-ofertas-activas',obtenerOfertasActivas, name='obtener-ofertas-activas'),
+    path('/obtener-comprobante-usuario',ComprobanteView.as_view(),name='comprobante'),
 ]
