@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from BaseDatos.models import MetodoDePago,Transaccion,Factura,Oferta,NotaVenta,VentaOferta,DetalleOferta,DetalleVenta,Producto
+from BaseDatos.models import MetodoDePago,Transaccion,Factura,Oferta,NotaVenta,VentaOferta,DetalleOferta,DetalleVenta,Producto,Cliente
 
 class MetodoPagoSerializers(serializers.ModelSerializer):
     class Meta:
@@ -54,6 +54,7 @@ class FacturaVentaSerializer(serializers.Serializer):
         nota_venta_data = validated_data.pop("nota_venta")
         productos_data = validated_data.pop("productos", [])
         ofertas_data = validated_data.pop("ofertas", [])
+        usar_puntos = nota_venta_data.pop("usar_puntos", False) 
 
         # 1. Crear la transacción
         transaccion = Transaccion.objects.create(
@@ -72,6 +73,18 @@ class FacturaVentaSerializer(serializers.Serializer):
             factura=factura,
             usuario_id=nota_venta_data["usuario"]
         )
+        
+        try:
+            cliente = Cliente.objects.get(usuario_id=nota_venta_data["usuario"])
+        except Cliente.DoesNotExist:
+            raise serializers.ValidationError("El cliente no existe.")
+    
+        if usar_puntos:
+                cliente.puntos = 0
+        else:
+            if cliente.puntos < 20:
+                cliente.puntos += 1
+        cliente.save()
 
         # 4. Crear detalle de venta para productos
         for prod in productos_data:
