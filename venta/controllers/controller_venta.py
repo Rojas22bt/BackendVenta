@@ -57,6 +57,7 @@ class ComprobanteView(APIView):
                         "fecha": factura.fecha,
                         "descripcion": factura.descripcion,
                         "cod_autorizacion": factura.cod_autorizacion,
+                        "documento_usuario": nota.documento_usuario,
                         "precio_total": float(factura.precio_total),
                         "detalles_productos": detalles_productos,
                         "detalles_ofertas": detalles_ofertas
