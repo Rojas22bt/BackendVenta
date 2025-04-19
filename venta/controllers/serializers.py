@@ -67,6 +67,7 @@ class FacturaVentaSerializer(serializers.Serializer):
         # 3. Crear la nota de venta
         nota_venta = NotaVenta.objects.create(
             descripcion=nota_venta_data["descripcion"],
+            documento_usuario=nota_venta_data["documento_usuario"],
             transaccion=transaccion,
             factura=factura,
             usuario_id=nota_venta_data["usuario"]
