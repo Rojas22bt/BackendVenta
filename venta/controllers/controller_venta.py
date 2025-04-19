@@ -51,15 +51,24 @@ class ComprobanteView(APIView):
                     "subtotal": float(vo.cantidad * vo.oferta.precio)
                 } for vo in nota.ventaoferta_set.all()]
 
-                comprobantes.append({
-                    "factura_id": factura.id,
-                    "fecha": factura.fecha,
-                    "descripcion": factura.descripcion,
-                    "cod_autorizacion": factura.cod_autorizacion,
-                    "precio_total": float(factura.precio_total),
-                    "detalles_productos": detalles_productos,
-                    "detalles_ofertas": detalles_ofertas
-                })
+                if detalles_productos or detalles_ofertas:
+                    comprobantes.append({
+                        "factura_id": factura.id,
+                        "fecha": factura.fecha,
+                        "descripcion": factura.descripcion,
+                        "cod_autorizacion": factura.cod_autorizacion,
+                        "precio_total": float(factura.precio_total),
+                        "detalles_productos": detalles_productos,
+                        "detalles_ofertas": detalles_ofertas
+                    })
+
+            if not comprobantes:
+                return Response({
+                    "cliente_id": usuario.id,
+                    "nombre": usuario.nombre,
+                    "correo": usuario.correo,
+                    "mensaje": "No hay comprobantes disponibles en el rango de fechas indicado."
+                }, status=status.HTTP_200_OK)
 
             return Response({
                 "cliente_id": usuario.id,
