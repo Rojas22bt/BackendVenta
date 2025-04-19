@@ -24,6 +24,7 @@ class Factura(models.Model):
 
 class NotaVenta(models.Model):
     descripcion = models.CharField(max_length=199)
+    documento_usuario = models.CharField(max_length=100, null=True, blank=True)
     transaccion = models.ForeignKey(Transaccion, on_delete=models.CASCADE)
     factura = models.ForeignKey(Factura, on_delete=models.CASCADE)
     usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
