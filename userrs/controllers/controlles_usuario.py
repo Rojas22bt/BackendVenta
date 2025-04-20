@@ -17,7 +17,7 @@ class crearCalificacion(APIView):
         serializer = CalificacionResponseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"mensaje": "Rol creado con éxito", "data": serializer.data}, status=status.HTTP_201_CREATED)
+            return Response({"mensaje": "Gracias por tu Calificacion", "data": serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 @api_view(['GET'])
