@@ -6,7 +6,7 @@ from .views import CrearRolView, RegistrarUsuarioViem,CrearDocumentoViem,CrearPr
 from .controllers.controller_bitacora import obtenerBitacora
 from .controllers.controlles_usuario import obtenerUsuarios, actualizar_usuario, obtenerPerfil
 from .controllers.controller_rol import obtenerRol
-from .controllers.controller_permiso import obtnerPermisos
+from .controllers.controller_permiso import obtnerPermisos, ActualizarPermisosAPIView
 
 
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path('documento/',CrearDocumentoViem.as_view(), name='documento-registro' ),
     path('privilegio/',CrearPrivilegioViem.as_view(), name='privilegio-registro' ),
     path('/login',LoginUsuarioView.as_view(), name='login' ),
+    path('/actualizar-permiso',ActualizarPermisosAPIView.as_view(), name='actualizar-permiso' ),
     
     
     path('/bitacora', obtenerBitacora, name="get_bitacoras"),
