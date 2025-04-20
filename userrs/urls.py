@@ -21,7 +21,7 @@ urlpatterns = [
     path('/',obtenerUsuarios,name='obtener-usuarios'),
     path('/perfil',obtenerPerfil,name='obtener-perfil'),
     path('/roles',obtenerRol,name='obtener-rol'),
-    path('/permisos',obtenerRol,name='obtener-permisos'),
+    path('/permisos',obtnerPermisos,name='obtener-permisos'),
 
     path('/actualizar',actualizar_usuario),
     
