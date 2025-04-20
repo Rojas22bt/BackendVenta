@@ -15,7 +15,7 @@ class PrivilegiosSerializer(serializers.ModelSerializer):
         
 class PermisoSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Permiso
+        model= Permiso
         fields = '__all__'
 
 class DocumentoSerializer(serializers.ModelSerializer):
