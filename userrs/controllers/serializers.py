@@ -170,7 +170,8 @@ class PerfilUsuarioSerializer(serializers.ModelSerializer):
             for doc in obj.detalledocumento_set.all()
         ]
         
-class CalificacionCreateSerializer(serializers.ModelSerializer):
+
+class CalificacionResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calificacion
-        fields = ['usuario_id','numero']
+        fields = ['id', 'usuario', 'numero']
