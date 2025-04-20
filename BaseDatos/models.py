@@ -165,15 +165,18 @@ class Empleado(models.Model):
 
 # --------- MÓDULO DE CALIFICACIONES ---------
 class Calificacion(models.Model):
+    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE, null=True)
     numero = models.DecimalField(max_digits=4, decimal_places=2)
 
-class HistorialCalificacion(models.Model):
-    calificacion = models.ForeignKey(Calificacion, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    calificacion_valor = models.DecimalField(max_digits=4, decimal_places=2)
+    def __str__(self):
+        return f"{self.usuario.correo} → {self.numero}"
+    
+class Comentario(models.Model):
+    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    descripcion = models.CharField(max_length=500)
 
-    class Meta:
-        unique_together = ('calificacion', 'usuario')
+    def __str__(self):
+        return f"{self.usuario.correo}: {self.descripcion[:50]}"
 
 # --------- MÓDULO DE BITÁCORA Y DOCUMENTOS ---------
 class Documento(models.Model):

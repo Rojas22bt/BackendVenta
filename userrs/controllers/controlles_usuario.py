@@ -1,8 +1,9 @@
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import status
 from BaseDatos.models import Usuario, Rol, DetalleDocumento
-from .serializers import UsuarioSerializer, PerfilUsuarioSerializer
+from .serializers import UsuarioSerializer, PerfilUsuarioSerializer, CalificacionCreateSerializer
 
 @api_view(['GET'])
 def obtenerUsuarios(request):
@@ -10,6 +11,14 @@ def obtenerUsuarios(request):
     serializer = UsuarioSerializer(usuarios, many=True)
     return Response(serializer.data)
     
+    
+class crearCalificacion(APIView):
+    def post(self, request):
+        serializer = CalificacionCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"mensaje": "Rol creado con éxito", "data": serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 @api_view(['GET'])
 def obtenerPerfil(request):

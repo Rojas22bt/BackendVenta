@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
-from BaseDatos.models import Rol, Usuario, Documento, DetalleDocumento ,Privilegio,Permiso, Bitacora
+from BaseDatos.models import Rol, Usuario, Documento, DetalleDocumento ,Privilegio,Permiso, Bitacora , Calificacion
 
 class RolSerializer(serializers.ModelSerializer):
     class Meta:
@@ -169,3 +169,8 @@ class PerfilUsuarioSerializer(serializers.ModelSerializer):
             }
             for doc in obj.detalledocumento_set.all()
         ]
+        
+class CalificacionCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Calificacion
+        fields = ['usuario_id','numero']
