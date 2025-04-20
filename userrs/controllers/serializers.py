@@ -178,6 +178,11 @@ class CalificacionResponseSerializer(serializers.ModelSerializer):
 
 
 class ComentarioSerializer(serializers.ModelSerializer):
+    usuario_nombre = serializers.SerializerMethodField()
+
     class Meta:
         model = Comentario
-        fields = ['id','descripcion','usuario']
+        fields = ['id', 'descripcion', 'usuario', 'usuario_nombre']  # ← incluir el nuevo campo
+
+    def get_usuario_nombre(self, obj):
+        return obj.usuario.nombre
