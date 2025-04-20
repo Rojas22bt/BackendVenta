@@ -54,7 +54,6 @@ class createFacturaView(APIView):
         serializer = FacturaVentaSerializer(data=request.data)
         if serializer.is_valid():
             resultado = serializer.save()
-            registrar_bitacora(request, "Registro de Factura",resultado.usuario)
             return Response({
                 "mensaje": "Venta exitosa",
                 "data": resultado  # ← aquí se usa el diccionario retornado desde create()
