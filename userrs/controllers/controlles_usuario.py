@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import status
-from BaseDatos.models import Usuario, Rol, DetalleDocumento
+from BaseDatos.models import Usuario, Rol, DetalleDocumento, Calificacion
 from .serializers import UsuarioSerializer, PerfilUsuarioSerializer, CalificacionResponseSerializer
 
 @api_view(['GET'])
@@ -19,6 +19,12 @@ class crearCalificacion(APIView):
             serializer.save()
             return Response({"mensaje": "Gracias por tu Calificacion", "data": serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+    
+@api_view(['GET'])
+def obtenerCalificacion(request):
+    calificacion = Calificacion.objects.all()
+    serializer = CalificacionResponseSerializer(calificacion, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def obtenerPerfil(request):
