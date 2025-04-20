@@ -5,7 +5,6 @@ from .controllers.serializers import MetodoPagoSerializers, OfertasSerializers ,
 from django.conf import settings
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
-from BaseDatos.controller_bitacora import registrar_bitacora
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
