@@ -3,7 +3,7 @@
 from django.urls import path
 from .views import CrearRolView, RegistrarUsuarioViem,CrearDocumentoViem,CrearPrivilegioViem , LoginUsuarioView
 
-from .controllers.controller_bitacora import obtenerBitacora
+from .controllers.controller_bitacora import obtenerBitacora, BitacoraCreateAPIView
 from .controllers.controlles_usuario import obtenerUsuarios, actualizar_usuario, obtenerPerfil, crearCalificacion, obtenerCalificacion, crerComentario, obtenerComentario
 from .controllers.controller_rol import obtenerRol
 from .controllers.controller_permiso import obtnerPermisos, ActualizarPermisosAPIView
@@ -18,6 +18,7 @@ urlpatterns = [
     path('/actualizar-permiso',ActualizarPermisosAPIView.as_view(), name='actualizar-permiso' ),
     path('/calificacion',crearCalificacion.as_view(), name='calificacion' ),
     path('/comentario',crerComentario.as_view(), name='comentario' ),
+    path('/crear-bitacora',BitacoraCreateAPIView.as_view(), name='bitacora-nueva' ),
     
     
     path('/bitacora', obtenerBitacora, name="get_bitacoras"),
