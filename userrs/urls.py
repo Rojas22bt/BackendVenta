@@ -6,6 +6,7 @@ from .views import CrearRolView, RegistrarUsuarioViem,CrearDocumentoViem,CrearPr
 from .controllers.controller_bitacora import obtenerBitacora
 from .controllers.controlles_usuario import obtenerUsuarios, actualizar_usuario, obtenerPerfil
 from .controllers.controller_rol import obtenerRol
+from .controllers.controller_permiso import obtnerPermisos
 
 
 urlpatterns = [
@@ -20,7 +21,9 @@ urlpatterns = [
     path('/',obtenerUsuarios,name='obtener-usuarios'),
     path('/perfil',obtenerPerfil,name='obtener-perfil'),
     path('/roles',obtenerRol,name='obtener-rol'),
+    path('/permisos',obtenerRol,name='obtener-permisos'),
 
-    path('/actualizar',actualizar_usuario)
+    path('/actualizar',actualizar_usuario),
+    
     
 ]
