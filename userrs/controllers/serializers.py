@@ -14,9 +14,12 @@ class PrivilegiosSerializer(serializers.ModelSerializer):
         fields = ['id','descripcion']
         
 class PermisoSerializer(serializers.ModelSerializer):
+    privilegio_nombre = serializers.CharField(source='privilegio.descripcion', read_only=True)
+
     class Meta:
-        model= Permiso
-        fields = '__all__'
+        model = Permiso
+        fields = ['id', 'rol', 'privilegio', 'estado', 'privilegio_nombre']
+
 
 class DocumentoSerializer(serializers.ModelSerializer):
     class Meta:
